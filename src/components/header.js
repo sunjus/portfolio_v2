@@ -1,35 +1,30 @@
 import * as React from "react"
 import PropTypes from "prop-types"
-import { Link } from "gatsby"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+import styled from "styled-components"
+import { theme, mixins } from "../style"
+
+const HeaderContainer = styled.header`
+  ${mixins.flexBetween};
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: ${theme.navbarHeight};
+  padding: 0px 50px;
+  background-color: ${theme.colors.navy};
+  transition: ${theme.transition};
+  z-index: 10;
+  &.nav-down {
+    box-shadow: 0 2px 4px ${theme.colors.transNavy};
+    height: ${theme.navbarScrollHeight};
+  }
+  &.nav-up {
+    height: ${theme.navbarScrollHeight};
+    transform: translateY(-${theme.navbarScrollHeight});
+  }
+`
+
+const Header = () => <HeaderContainer></HeaderContainer>
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
